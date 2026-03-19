@@ -2,6 +2,16 @@
 
 A modern, production-ready React application that simulates real-time golf discussions with topic-specific conversations, user reactions, and live comment simulation.
 
+## 🎥 Demo Video
+
+Watch a quick 5-minute walkthrough of the Live Comments platform:
+
+**[📹 Loom Video Walkthrough](https://loom.com/embed/your-video-id-here)**
+
+*Note: Video placeholder - actual link will be added here*
+
+---
+
 ## Features
 
 - 🚀 **Real-time Comment Simulation** - Live comments appear every 10-15 seconds with typing indicators
