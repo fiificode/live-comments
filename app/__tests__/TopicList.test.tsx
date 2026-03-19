@@ -34,7 +34,7 @@ describe('TopicList', () => {
       </MemoryRouter>
     )
 
-    await userEvent.click(screen.getByRole('button', { name: /Masters 2025/i }))
+    await userEvent.click(screen.getByRole('button', { name: /Rory Mcllroy: deep dive/i }))
 
     expect(screen.getByText(/Thread/i)).toBeTruthy()
   })

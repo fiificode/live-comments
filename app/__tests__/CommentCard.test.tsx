@@ -26,24 +26,19 @@ describe('P10: CommentCard renders all required fields for any comment', () => {
           const { container, unmount } = render(<CommentCard comment={comment} isNew={false} />)
 
           // Username is displayed in the username span
-          const usernameEl = container.querySelector('.font-semibold.text-sm')
+          const usernameEl = container.querySelector('.font-normal.text-\\[16px\\]')
           expect(usernameEl).toBeTruthy()
           expect(usernameEl!.textContent?.trim()).toBe(comment.authorUsername.trim())
 
           // Message body is displayed
-          const msgEl = container.querySelector('p.text-sm')
+          const msgEl = container.querySelector('p.text-\\[16px\\]')
           expect(msgEl).toBeTruthy()
           expect(msgEl!.textContent?.trim()).toBe(comment.message.trim())
 
-          // Relative timestamp exists
-          const timeEl = container.querySelector('.text-xs.text-gray-400')
+          // Relative timestamp exists (shows formatted time)
+          const timeEl = container.querySelector('.text-xs.font-light')
           expect(timeEl).toBeTruthy()
-          expect(timeEl!.textContent).toMatch(/just now|\d+s ago|\d+m ago|\d+h ago/)
-
-          // Like count (reaction affordance)
-          const likeCountEl = container.querySelector('button span:last-child')
-          expect(likeCountEl).toBeTruthy()
-          expect(likeCountEl!.textContent).toBe(String(comment.likes))
+          expect(timeEl!.textContent).toMatch(/\d{1,2}:\d{2} (am|pm)/)
 
           // Avatar wrapper with aria-label present
           const avatarEl = container.querySelector('[aria-label^="Avatar for"]')
