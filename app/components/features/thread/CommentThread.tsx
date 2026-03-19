@@ -93,7 +93,7 @@ export default function CommentThread({ topicId }: CommentThreadProps) {
         
       {/* Green line */}
       <div 
-        className="h-px shrink-0"
+        className="h-px w-full"
         style={{ background: "linear-gradient(to right, #006824, #FFDF75)" }}
       ></div>
 
@@ -102,7 +102,7 @@ export default function CommentThread({ topicId }: CommentThreadProps) {
         ref={scrollRef}
         role="feed"
         aria-label="Comment thread"
-        className="flex-1 overflow-y-auto px-4"
+        className="flex-1 overflow-y-auto px-4 pb-32"
         onScroll={handleScroll}
       >
         {comments.length === 0 ? (

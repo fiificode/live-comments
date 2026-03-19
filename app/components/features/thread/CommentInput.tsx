@@ -29,10 +29,12 @@ export default function CommentInput({ topicId: _topicId, onSubmit }: CommentInp
   return (
     <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#FFFAED]">
       {/* Gradient border above */}
-      <div 
-        className="h-px w-full"
-        style={{ background: "linear-gradient(to right, #006824, #FFDF75)" }}
-      ></div>
+      <div className="max-w-lg mx-auto">
+        <div 
+          className="h-px"
+          style={{ background: "linear-gradient(to right, #006824, #FFDF75)" }}
+        ></div>
+      </div>
       
       <div className="px-4 py-4">
         <div className="max-w-lg mx-auto">
