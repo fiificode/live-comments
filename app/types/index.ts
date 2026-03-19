@@ -18,6 +18,8 @@ export interface Comment {
   timestamp: number   // Unix ms
   likes: number
   isLive?: boolean    // true if injected by Live_Simulator
+  avatarUrl?: string   // optional avatar image URL
+  reactions?: { [key: string]: number | undefined }  // reaction emoji -> count mapping
 }
 
 export interface StoreState {
