@@ -1,36 +1,44 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router'
-import TopicList from '../components/features/topics/TopicList'
-import AuthGate from '../components/features/auth/AuthGate'
-import useStore from '../store/useStore'
+import { useState } from "react";
+import { useNavigate } from "react-router";
+import TopicList from "../components/features/topics/TopicList";
+import AuthGate from "../components/features/auth/AuthGate";
+import useStore from "../store/useStore";
+import TabBar from "~/components/layout/TabBar";
+import Header from "~/components/layout/Header";
 
 export default function Home() {
-  const navigate = useNavigate()
-  const signIn = useStore((s) => s.signIn)
-  const [pendingTopicId, setPendingTopicId] = useState<string | null>(null)
+  const navigate = useNavigate();
+  const signIn = useStore((s) => s.signIn);
+  const [pendingTopicId, setPendingTopicId] = useState<string | null>(null);
 
   function handleAuthRequired(topicId: string) {
-    setPendingTopicId(topicId)
+    setPendingTopicId(topicId);
   }
 
-  function handleAuth() {
-    signIn()
+  function handleAuth(e?: React.FormEvent) {
+    e?.preventDefault();
+    signIn();
+    
     if (pendingTopicId) {
-      navigate(`/thread/${pendingTopicId}`)
+      setTimeout(() => {
+        navigate(`/thread/${pendingTopicId}`);
+        setPendingTopicId(null);
+      }, 100);
     }
-    setPendingTopicId(null)
   }
 
   function handleDismiss() {
-    setPendingTopicId(null)
+    setPendingTopicId(null);
   }
 
   return (
-    <div>
+    <div className="animate-page-in">
+      <Header />
+      <TabBar />
       <TopicList onAuthRequired={handleAuthRequired} />
       {pendingTopicId && (
         <AuthGate onAuth={handleAuth} onDismiss={handleDismiss} />
       )}
     </div>
-  )
+  );
 }
