@@ -68,11 +68,11 @@ export default function CommentThread({ topicId }: CommentThreadProps) {
   }
 
   return (
-    <div className="min-h-screen pb-24">
+    <div className="h-screen flex flex-col">
       <Toast message={toastMessage} visible={showToast} />
       
-      {/* Header with back button and topic info */}
-      <div className="px-4 pt-6 bg-[#FFFAED]">
+      {/* Fixed Header */}
+      <div className="px-4 pt-6 bg-[#FFFAED] shrink-0">
         <button 
           onClick={() => navigate(-1)} 
           className="flex items-center cursor-pointer text-[#000000] mb-4 text-xs font-medium"
@@ -89,20 +89,20 @@ export default function CommentThread({ topicId }: CommentThreadProps) {
             <p className="text-[16px] text-[#000000] mb-4">{topic.subtitle}</p>
           </>
         )}
-        
       </div>
-        {/* Green line */}
-        <div 
-          className="h-px mb-2"
-          style={{ background: "linear-gradient(to right, #006824, #FFDF75)" }}
-        ></div>
+        
+      {/* Green line */}
+      <div 
+        className="h-px shrink-0"
+        style={{ background: "linear-gradient(to right, #006824, #FFDF75)" }}
+      ></div>
 
-      {/* Comments section */}
+      {/* Scrollable Comments section */}
       <div
         ref={scrollRef}
         role="feed"
         aria-label="Comment thread"
-        className="px-4 pb-8 h-[calc(100vh-200px)] overflow-y-auto"
+        className="flex-1 overflow-y-auto px-4"
         onScroll={handleScroll}
       >
         {comments.length === 0 ? (
