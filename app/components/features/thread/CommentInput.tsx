@@ -42,7 +42,7 @@ export default function CommentInput({ topicId: _topicId, onSubmit }: CommentInp
               value={text}
               onChange={(e) => setText(e.target.value.slice(0, MAX_CHARS))}
               onKeyDown={handleKeyDown}
-              aria-label="Type your comment here"
+              aria-label="Write a comment"
               placeholder="Type your comment here"
               className="w-full bg-transparent text-sm outline-none text-gray-900 placeholder-[#000000] focus-visible:outline-none"
             />

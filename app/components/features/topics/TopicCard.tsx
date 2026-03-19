@@ -17,7 +17,7 @@ export default function TopicCard({
       onClick={onClick}
       className={`w-full flex cursor-pointer items-center justify-between p-4 mb-2 rounded-lg text-left transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1A3A2A] focus-visible:ring-offset-2 ${
         isActive
-          ? " bg-[#146623] shadow text-white"
+          ? "border-l-4 border-[#1A3A2A] bg-[#146623] shadow text-white"
           : "border-l-4 border-transparent bg-[#F5EAD3] hover:shadow-md text-gray-900"
       }`}
     >
