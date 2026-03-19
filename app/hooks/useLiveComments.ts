@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import useStore from '../store/useStore'
-import { MOCK_USERNAMES, MOCK_MESSAGES } from '../data/mockComments'
+import { getTopicMockData } from '../data/mockComments'
 import type { Comment } from '../types'
 
 function randomBetween(min: number, max: number) {
@@ -19,11 +19,15 @@ export function useLiveComments(topicId: string) {
   const intervalRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
+    // Get topic-specific mock data
+    const mockData = getTopicMockData(topicId)
+    const { usernames, messages } = mockData
+
     function scheduleNext() {
       const delay = randomBetween(10000, 15000)
       intervalRef.current = setTimeout(() => {
-        const username = randomItem(MOCK_USERNAMES)
-        const message = randomItem(MOCK_MESSAGES)
+        const username = randomItem(usernames)
+        const message = randomItem(messages)
 
         // Show typing indicator for 1–2 seconds
         setTypingUser(username)
