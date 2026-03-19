@@ -23,16 +23,41 @@ function getInitials(username: string): string {
 interface AvatarProps {
   username: string
   size?: 'sm' | 'md'
+  avatarUrl?: string
 }
 
-export default function Avatar({ username, size = 'md' }: AvatarProps) {
+export default function Avatar({ username, size = 'md', avatarUrl }: AvatarProps) {
   const color = COLORS[hashUsername(username)]
   const initials = getInitials(username)
-  const sizeClass = size === 'sm' ? 'w-8 h-8 text-xs' : 'w-10 h-10 text-sm'
+  const sizeClass = size === 'sm' ? 'w-[26px] h-[26px] text-xs' : 'w-10 h-10 text-sm'
+
+  if (avatarUrl) {
+    return (
+      <div
+        className={`${sizeClass} rounded-full flex items-center justify-center font-bold text-white shrink-0 overflow-hidden`}
+        aria-label={`Avatar for ${username}`}
+      >
+        <img 
+          src={avatarUrl} 
+          alt={`${username}'s avatar`}
+          className="w-full h-full object-cover"
+          onError={(e) => {
+            const target = e.currentTarget
+            const parent = target.parentElement
+            if (parent) {
+              // Fallback to colored background with initials
+              parent.style.backgroundColor = color
+              parent.innerHTML = `<span class="${sizeClass} rounded-full flex items-center justify-center font-bold text-white shrink-0" style="background-color: ${color}">${initials}</span>`
+            }
+          }}
+        />
+      </div>
+    )
+  }
 
   return (
     <div
-      className={`${sizeClass} rounded-full flex items-center justify-center font-bold text-white flex-shrink-0`}
+      className={`${sizeClass} rounded-full flex items-center justify-center font-bold text-white shrink-0`}
       style={{ backgroundColor: color }}
       aria-label={`Avatar for ${username}`}
     >
