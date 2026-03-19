@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Comment } from '../../../types'
+import type { Comment } from '../../../types'
 import Avatar from '../../ui/Avatar'
 
 interface CommentCardProps {
@@ -15,29 +15,56 @@ function getRelativeTime(timestamp: number): string {
   return `${Math.floor(diff / 3600000)}h ago`
 }
 
+// Format time like in the image (e.g., "13:41 pm")
+function formatTime(timestamp: number): string {
+  const date = new Date(timestamp)
+  const hours = date.getHours()
+  const minutes = date.getMinutes()
+  const period = hours >= 12 ? 'pm' : 'am'
+  const displayHours = hours % 12 || 12
+  const displayMinutes = minutes.toString().padStart(2, '0')
+  return `${displayHours}:${displayMinutes} ${period}`
+}
+
+const REACTIONS = ['👍', '💯', '❤️', '✨', '👏']
+
 export default function CommentCard({ comment, isNew }: CommentCardProps) {
-  const [relTime, setRelTime] = useState(() => getRelativeTime(comment.timestamp))
+  const [relTime, setRelTime] = useState(() => formatTime(comment.timestamp))
 
   useEffect(() => {
     const id = setInterval(() => {
-      setRelTime(getRelativeTime(comment.timestamp))
-    }, 30000)
+      setRelTime(formatTime(comment.timestamp))
+    }, 60000) 
     return () => clearInterval(id)
   }, [comment.timestamp])
 
   return (
-    <div className={`flex gap-3 p-4 ${isNew ? 'animate-fade-slide-up' : ''}`}>
-      <Avatar username={comment.authorUsername} size="md" />
+    <div className={`flex gap-3 py-4 ${isNew ? 'animate-fade-slide-up' : ''}`}>
       <div className="flex-1 min-w-0">
-        <div className="flex items-baseline gap-2 mb-1">
-          <span className="font-semibold text-sm text-gray-900">{comment.authorUsername}</span>
-          <span className="text-xs text-gray-400">{relTime}</span>
+      <div className='flex items-center gap-3'>
+      <Avatar username={comment.authorUsername} size="sm" avatarUrl={comment.avatarUrl} />
+        <div className="flex items-center gap-5">
+          <span className="font-normal text-[16px] text-[#000000]">{comment.authorUsername}</span>
+          <span className="text-xs font-light text-[#000000]">{relTime}</span>
         </div>
-        <p className="text-sm text-gray-700 leading-relaxed">{comment.message}</p>
-        <button className="flex items-center gap-1 mt-2 text-xs text-gray-400 hover:text-red-400 transition-colors">
-          <span>♥</span>
-          <span>{comment.likes}</span>
-        </button>
+      </div>
+        <p className="text-[16px] text-[#000000] font-light mb-3 mt-1">{comment.message}</p>
+        
+        {/* Reaction buttons - only show for existing comments, not new ones */}
+        {!isNew && (
+          <div className="flex gap-2">
+            {REACTIONS.filter(reaction => comment.reactions?.[reaction] !== undefined).map((reaction) => (
+              <button
+                key={reaction}
+                className="flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-transparent border border-gray-300 hover:bg-gray-200 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-300"
+                aria-label={`React with ${reaction}`}
+              >
+                <span>{reaction}</span>
+                <span className="text-gray-600">{comment.reactions?.[reaction] || 0}</span>
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )

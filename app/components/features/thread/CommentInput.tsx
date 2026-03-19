@@ -27,37 +27,26 @@ export default function CommentInput({ topicId: _topicId, onSubmit }: CommentInp
   }
 
   return (
-    <div
-      className="fixed bottom-0 left-0 right-0 z-40 flex justify-center"
-      style={{ backgroundColor: 'transparent' }}
-    >
-      <div className="w-full max-w-lg px-4 pb-4 pt-2" style={{ backgroundColor: '#F5F0E8' }}>
-        <div className="flex items-center gap-2 bg-white rounded-full px-4 py-2 shadow-md">
-          <input
-            type="text"
-            value={text}
-            onChange={(e) => setText(e.target.value.slice(0, MAX_CHARS))}
-            onKeyDown={handleKeyDown}
-            aria-label="Write a comment"
-            placeholder="Write a comment..."
-            className="flex-1 bg-transparent text-sm outline-none text-gray-900 placeholder-gray-400"
-          />
-          <span className={`text-xs flex-shrink-0 ${text.length >= MAX_CHARS ? 'text-red-400' : 'text-gray-400'}`}>
-            {text.length}/{MAX_CHARS}
-          </span>
-          <button
-            onClick={handleSubmit}
-            disabled={isDisabled}
-            aria-label="Post comment"
-            className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
-              isDisabled
-                ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                : 'text-white'
-            }`}
-            style={isDisabled ? {} : { backgroundColor: '#1A3A2A' }}
-          >
-            ↑
-          </button>
+    <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#FFFAED]">
+      {/* Gradient border above */}
+      <div 
+        className="h-px w-full"
+        style={{ background: "linear-gradient(to right, #006824, #FFDF75)" }}
+      ></div>
+      
+      <div className="px-4 py-4">
+        <div className="max-w-lg mx-auto">
+          <div className="bg-[#F5EAD3] rounded-md px-4 py-3 shadow-sm border border-gray-200">
+            <input
+              type="text"
+              value={text}
+              onChange={(e) => setText(e.target.value.slice(0, MAX_CHARS))}
+              onKeyDown={handleKeyDown}
+              aria-label="Type your comment here"
+              placeholder="Type your comment here"
+              className="w-full bg-transparent text-sm outline-none text-gray-900 placeholder-[#000000] focus-visible:outline-none"
+            />
+          </div>
         </div>
       </div>
     </div>
