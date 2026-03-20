@@ -6,9 +6,7 @@ A modern, production-ready React application that simulates real-time golf discu
 
 Watch a quick 5-minute walkthrough of the Live Comments platform:
 
-**[📹 Loom Video Walkthrough](https://loom.com/embed/your-video-id-here)**
-
-*Note: Video placeholder - actual link will be added here*
+**[📹 Loom Video Walkthrough](https://www.loom.com/share/d81f966429d647efb2b8ba5a78e2e367)**
 
 ---
 
@@ -87,6 +85,7 @@ live-comments/
 ## How to Run the Project
 
 1. **Clone and Install**:
+
    ```bash
    git clone <repository-url>
    cd live-comments
@@ -94,16 +93,20 @@ live-comments/
    ```
 
 2. **Start Development Server**:
+
    ```bash
    npm run dev
    ```
+
    - Navigate to `http://localhost:5173`
    - Hot reload enabled for instant feedback
 
 3. **Build for Production**:
+
    ```bash
    npm run build
    ```
+
    - Optimized build created in `dist/` folder
 
 4. **Type Checking**:
@@ -115,7 +118,7 @@ live-comments/
 
 ### Design Decisions
 
-1. **Mock Authentication**: 
+1. **Mock Authentication**:
    - **Assumption**: Users will authenticate through a simple modal flow
    - **Trade-off**: No real backend authentication for demo purposes
    - **Benefit**: Faster development and easier testing
@@ -203,42 +206,6 @@ live-comments/
 - **Static Avatars**: Limited to predefined images
 
 Despite these limitations, the application provides a realistic demonstration of modern React development patterns and real-time UI techniques.
-
-## Deployment
-
-### Docker Deployment
-
-To build and run using Docker:
-
-```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
-```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
 
 ## Styling
 
