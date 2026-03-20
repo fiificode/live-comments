@@ -21,16 +21,19 @@ describe('TopicCard unit tests', () => {
     expect(container.querySelector('svg')).toBeTruthy()
   })
 
-  it('applies the green left border class when isActive is true', () => {
+  it('applies the active styling when isActive is true', () => {
     const { container } = render(<TopicCard topic={mockTopic} isActive={true} onClick={vi.fn()} />)
     const button = container.querySelector('button')!
-    expect(button.className).toContain('border-[#1A3A2A]')
+    expect(button.className).toContain('bg-[#146623]')
+    expect(button.className).toContain('shadow')
+    expect(button.className).toContain('text-white')
   })
 
-  it('does not apply the active border class when isActive is false', () => {
+  it('applies the inactive styling when isActive is false', () => {
     const { container } = render(<TopicCard topic={mockTopic} isActive={false} onClick={vi.fn()} />)
     const button = container.querySelector('button')!
-    expect(button.className).toContain('border-transparent')
+    expect(button.className).toContain('bg-[#F5EAD3]')
+    expect(button.className).toContain('text-gray-900')
   })
 
   it('calls onClick when clicked', () => {
