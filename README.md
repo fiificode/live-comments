@@ -2,6 +2,8 @@
 
 A modern, production-ready React application that simulates real-time golf discussions with topic-specific conversations, user reactions, and live comment simulation.
 
+**🚀 Live Demo:** [https://live-comments-lac.vercel.app/](https://live-comments-lac.vercel.app/)
+
 ## 🎥 Demo Video
 
 Watch a quick 5-minute walkthrough of the Live Comments platform:
